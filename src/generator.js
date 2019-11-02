@@ -86,20 +86,32 @@ function envelope(entity) {
 
 const fs = require('fs');
 
-const counts = { index: 0, customer: 0, product: 0, order: 0 };
+const totals = { index: 0, customer: 0, product: 0, order: 0 };
 
-for (const item of generateData({
+/** Number of each type of entity to create */
+const counts = {
   customers: 533,
   products: 62,
   orders: 2755
-})) {
-  // counts[item.type] = counts[item.type] + 1;
-  // counts.index = counts.index + 1;
-  // if (0 === counts.index % 100) {
-  //   process.stdout.write(
-  //     `Customers: ${counts.customer}, Products: ${counts.product}, Orders: ${counts.order}\n`
-  //   );
-  // }
+};
+
+/** Total number of entities */
+const total = Object.getOwnPropertyNames(counts).reduce(
+  (p, c) => p + counts[c],
+  0
+);
+
+/** Limit to 25 output messages */
+const reportFrequency = Math.floor(total / 25);
+
+for (const item of generateData(counts)) {
+  totals[item.type] = totals[item.type] + 1;
+  totals.index = totals.index + 1;
+  if (0 === totals.index % reportFrequency) {
+    process.stdout.write(
+      `Customers: ${totals.customer}, Products: ${totals.product}, Orders: ${totals.order}\n`
+    );
+  }
   fs.writeFileSync(
     `${process.cwd()}/data/${item.type}s/${item.id}.json`,
     JSON.stringify(envelope(item), null, 2)
