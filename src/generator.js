@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 const f = require('faker');
 
 const { pick, several, normal, lognormal } = require('./distributions.js');
