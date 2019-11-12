@@ -42,9 +42,8 @@ function* generateCustomers(count = 100) {
           timestamp: f.date.recent(),
           text: f.lorem.sentence()
         }),
-        // () => normal(3, 5)
         () => poisson(3)
-      ).sort((a, b) => a.timestamp - b.timestamp),
+      ),
       verified: f.random.boolean()
     };
   }
@@ -80,6 +79,9 @@ function* generateOrders(customers, products, count = 1000) {
 
 function envelope(entity) {
   return {
+    headers: {
+      type: entity.type
+    },
     instance: entity
   };
 }
@@ -90,9 +92,9 @@ const totals = { index: 0, customer: 0, product: 0, order: 0 };
 
 /** Number of each type of entity to create */
 const counts = {
-  customers: 533,
-  products: 62,
-  orders: 2755
+  customers: 5033,
+  products: 602,
+  orders: 20755
 };
 
 /** Total number of entities */
