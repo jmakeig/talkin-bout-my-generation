@@ -11,6 +11,7 @@
   "author": "Justin Makeig <jmpublic+github@makeig.com> (https://github.com/jmakeig)",
   "license": "Apache-2.0",
   "dependencies": {
-    "faker": "^4.1.0"
+    "faker": "^4.1.0",
+    "prob.js": "^1.0.6"
   }
 }

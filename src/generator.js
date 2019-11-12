@@ -5,9 +5,8 @@ const f = require('faker');
 const {
   pick,
   several,
-  uniform,
-  normal,
-  poisson
+	normal,
+	lognormal
 } = require('./distributions.js');
 
 function* generateData({ customers, products, orders }) {
@@ -42,7 +41,7 @@ function* generateCustomers(count = 100) {
           timestamp: f.date.recent(),
           text: f.lorem.sentence()
         }),
-        () => poisson(3)
+        () => lognormal(0, 1.5)
       ),
       verified: f.random.boolean()
     };
@@ -71,7 +70,7 @@ function* generateOrders(customers, products, count = 1000) {
           product: pick(products),
           quantity: Math.max(1, Math.floor(normal(100, 60)))
         }),
-        () => poisson(6)
+        () => lognormal(0, 1.5)
       )
     };
   }
