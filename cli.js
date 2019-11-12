@@ -16,10 +16,9 @@ Usage:
 Options:
   -h --help           Show this screen
   --orders=<num>      Number of orders    [default: 100]
-  --products=<num>    Number of products  [default: 5]
-	--customers=<num>   Number of customers [default: 25]
-	-o --output DIR     Output directory
-
+	--products=<num>    Number of products  [default: 5]
+  --customers=<num>   Number of customers [default: 25]
+  -o --output DIR     Output directory
 `;
 
 const options = docopt(doc);
