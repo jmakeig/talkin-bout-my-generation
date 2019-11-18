@@ -10,15 +10,15 @@ const Prob = require('prob.js');
  * @param {function} dist
  */
 function several(fct = () => undefined, dist = Prob.uniform(0, 10)) {
-  const rand = dist();
-  const length = Math.max(Math.floor(rand), 0);
-  return Array.from(new Array(length), fct);
+	const rand = dist();
+	const length = Math.max(Math.floor(rand), 0);
+	return Array.from(new Array(length), fct);
 }
 
 function pick(array, dist = Prob.uniform(0, array.length - 1)) {
-  const rand = dist();
-  const index = Math.max(0, Math.min(Math.floor(rand), array.length - 1));
-  return array[index];
+	const rand = dist();
+	const index = Math.max(0, Math.min(Math.floor(rand), array.length - 1));
+	return array[index];
 }
 
 // function uniform(min = 0, max = 10) {
@@ -64,11 +64,11 @@ function pick(array, dist = Prob.uniform(0, array.length - 1)) {
 // }
 
 module.exports = {
-  pick,
-  several,
-  uniform: (min, max) => Prob.uniform(min, max)(),
-  normal: (mean, stdev) => Prob.normal(mean, stdev)(),
-  lognormal: (mean, stdev) => Prob.lognormal(mean, stdev)(),
-  poisson: lambda => Prob.poisson(lambda)(),
-  zipf: (s, n) => Prob.zipf(s, n)()
+	pick,
+	several,
+	uniform: (min, max) => Prob.uniform(min, max)(),
+	normal: (mean, stdev) => Prob.normal(mean, stdev)(),
+	lognormal: (mean, stdev) => Prob.lognormal(mean, stdev)(),
+	poisson: lambda => Prob.poisson(lambda)(),
+	zipf: (s, n) => Prob.zipf(s, n)()
 };
