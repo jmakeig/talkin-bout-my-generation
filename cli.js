@@ -58,6 +58,15 @@ const reportFrequency = Math.floor(total / 25);
 
 const start = process.hrtime();
 
+function fileWriter(directory) {
+	return function write(name, instance) {
+		return fs.writeFileSync(`${directory}/${name}`, JSON.stringify(instance, null, 2));
+	};
+}
+
+// TODO: Create a MarLogic command to write to a database
+const write = fileWriter(outputDir);
+
 for (const item of generateData(counts)) {
 	totals[item.type] = totals[item.type] + 1;
 	totals.index = totals.index + 1;
@@ -66,12 +75,15 @@ for (const item of generateData(counts)) {
 			`Customers: ${totals.customer}, Products: ${totals.product}, Orders: ${totals.order}\n`
 		);
 	}
-	fs.writeFileSync(
-		`${outputDir}/${item.type}s/${item.id}.json`,
-		JSON.stringify(envelope(item), null, 2)
+	write(
+		`${item.type}s/${item.id}.json`,
+		envelope(item)
 	);
 }
 const duration = process.hrtime(start);
-diagnostics.write(`Generated ${totals.index} files in ${duration[0]}s ${duration[1] / 1000000}ms\n`);
+diagnostics.write(
+	`Generated ${totals.index} files in ${duration[0]}s ${duration[1] /
+	1000000}ms\n`
+);
 
 process.exit(0);
