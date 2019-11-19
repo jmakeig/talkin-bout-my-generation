@@ -64,7 +64,7 @@ function* generateOrders(customers, products, count = 1000) {
 					product: pick(products),
 					quantity: Math.max(1, Math.floor(normal(100, 60)))
 				}),
-				() => lognormal(0, 1.5)
+				() => Math.max(lognormal(0, 1.5), 1)
 			)
 		};
 	}
