@@ -15,7 +15,9 @@
 	"dependencies": {
 		"docopt": "^0.6.2",
 		"faker": "^4.1.0",
-		"prettier": "^1.19.1",
 		"prob.js": "^1.0.6"
+	},
+	"devDependencies": {
+		"prettier": "^1.19.1"
 	}
 }
